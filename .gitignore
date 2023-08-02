@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/BowlingBall/bin/Debug
+/BowlingBall/obj
+/BowlingBall.Tests/bin/Debug
+/BowlingBall.Tests/obj/Debug
+/packages
+/.vs
