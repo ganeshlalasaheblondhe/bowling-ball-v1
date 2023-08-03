@@ -1,4 +1,5 @@
-﻿using BowlingBall.Enums;
+﻿using BowlingBall.Configurations.Constants;
+using BowlingBall.Enums;
 using BowlingBall.Factory.Contracts;
 using BowlingBall.Factory.Implementation;
 using BowlingBall.Modals.Contracts;
@@ -23,7 +24,7 @@ namespace BowlingBall.Engine
         
 
         #region Internal variables for identifing the current frame and do the analysis.
-        private int _numberOfRemainingAttempts = 2;
+        private int _numberOfRemainingAttempts = Constants.MAXIMUM_ATTEMPTS_PER_FRAME;
         private int _firstRoll = 0;
         private int _secondRoll = 0;
         #endregion
@@ -44,7 +45,7 @@ namespace BowlingBall.Engine
         {
             _firstRoll = 0;
             _secondRoll = 0;
-            _numberOfRemainingAttempts = 2;
+            _numberOfRemainingAttempts = Constants.MAXIMUM_ATTEMPTS_PER_FRAME;
         }
 
         /// <summary>
@@ -103,14 +104,14 @@ namespace BowlingBall.Engine
         /// <returns></returns>
         private FrameType FrameTypeFinder(int fallingPins)
         {
-            if (_frames.Count >= 10)
+            if (_frames.Count >= Constants.TOTAL_NUMBER_OF_FRAMES)
             {
                 _firstRoll = fallingPins;
                 return FrameType.ExtraBallFrame;
             }
 
 
-            if (fallingPins == 10 && _numberOfRemainingAttempts == 2)
+            if (fallingPins == Constants.MAXIMUM_SCORE_PER_FRAME && _numberOfRemainingAttempts == 2)
             {
                 return FrameType.StrikeFrame;
             }
@@ -125,7 +126,7 @@ namespace BowlingBall.Engine
                 _numberOfRemainingAttempts--;
                 _secondRoll = fallingPins;
 
-                if (_firstRoll + _secondRoll == 10)
+                if (_firstRoll + _secondRoll == Constants.MAXIMUM_SCORE_PER_FRAME)
                     return FrameType.SpareFrame;
                 else
                     return FrameType.OpenFrame;

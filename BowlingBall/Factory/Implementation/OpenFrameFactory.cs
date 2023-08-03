@@ -11,8 +11,6 @@ namespace BowlingBall.Factory.Implementation
     {
         /// <inheritdoc/>
         public Frame CreateFrame(int firstRoll, int secondRoll, List<int> scoresPerRoll)
-        {
-            return new OpenFrame(firstRoll, secondRoll, scoresPerRoll);
-        }
+        => new OpenFrame(firstRoll, secondRoll, scoresPerRoll);
     }
 }

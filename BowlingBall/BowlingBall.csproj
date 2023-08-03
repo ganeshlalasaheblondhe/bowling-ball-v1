@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\Constants\Constants.cs" />
     <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="Engine\IGameEngine.cs" />
     <Compile Include="Enums\FrameType.cs" />
