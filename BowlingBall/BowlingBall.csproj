@@ -43,6 +43,11 @@
     <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="Engine\IGameEngine.cs" />
     <Compile Include="Enums\FrameType.cs" />
+    <Compile Include="Factory\Contracts\IFrameFactory.cs" />
+    <Compile Include="Factory\Implementation\ExtraBallFrameFactory.cs" />
+    <Compile Include="Factory\Implementation\StrikeFrameFactory.cs" />
+    <Compile Include="Factory\Implementation\SpareFrameFactory.cs" />
+    <Compile Include="Factory\Implementation\OpenFrameFactory.cs" />
     <Compile Include="Modals\Contracts\CloseFrame.cs" />
     <Compile Include="Modals\Contracts\ExtraBallFrame.cs" />
     <Compile Include="Modals\Contracts\Frame.cs" />

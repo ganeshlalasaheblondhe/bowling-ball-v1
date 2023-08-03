@@ -1,4 +1,6 @@
 ﻿using BowlingBall.Enums;
+using BowlingBall.Factory.Contracts;
+using BowlingBall.Factory.Implementation;
 using BowlingBall.Modals.Contracts;
 using System.Collections.Generic;
 
@@ -18,6 +20,7 @@ namespace BowlingBall.Engine
         /// Variable keeps the track of all the rolled scores.
         /// </summary>
         private readonly List<int> _scorePerThrow;
+        
 
         #region Internal variables for identifing the current frame and do the analysis.
         private int _numberOfRemainingAttempts = 2;
@@ -50,42 +53,31 @@ namespace BowlingBall.Engine
         /// <param name="frameType"></param>
         private void Analysis(FrameType frameType)
         {
+            IFrameFactory factory = null;
 
             switch (frameType)
             {
                 case FrameType.OpenFrame:
                     {
-                        var openFrame = new OpenFrame(_firstRoll, _secondRoll, _scorePerThrow);
-                        _frames.Add(openFrame);
-
-                        ResetTheAnalysisVariables();
+                        factory = new OpenFrameFactory();
                         break;
                     }
 
                 case FrameType.SpareFrame:
                     {
-                        var spareFrame = new SpareFrame(_firstRoll, _secondRoll, _scorePerThrow);
-                        _frames.Add(spareFrame);
-
-                        ResetTheAnalysisVariables();
+                        factory = new SpareFrameFactory();
                         break;
 
                     }
 
                 case FrameType.StrikeFrame:
                     {
-                        var strikeFrame = new StrikeFrame(_scorePerThrow);
-                        _frames.Add(strikeFrame);
-
-                        ResetTheAnalysisVariables();
+                        factory = new StrikeFrameFactory();
                         break;
                     }
                 case FrameType.ExtraBallFrame:
                     {
-                        var strikeFrame = new ExtraBallFrame(_firstRoll,_scorePerThrow);
-                        _frames.Add(strikeFrame);
-
-                        ResetTheAnalysisVariables();
+                        factory = new ExtraBallFrameFactory();
                         break;
                         
                     }
@@ -95,6 +87,13 @@ namespace BowlingBall.Engine
                     }
             }
 
+            if(factory != null)
+            {
+                var frame = factory.CreateFrame(_firstRoll, _secondRoll, _scorePerThrow);
+                _frames.Add(frame);
+                ResetTheAnalysisVariables();
+                factory = null;
+            }
         }
 
         /// <summary>
